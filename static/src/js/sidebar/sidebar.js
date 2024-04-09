@@ -4,8 +4,6 @@ import { Component, useState } from "@odoo/owl";
 import { useStories } from "../stories";
 
 export class Sidebar extends Component {
-    static template = "owlybook.Sidebar";
-
     setup() {
         this.stories = useStories();
         this.filterName = "";
@@ -103,10 +101,7 @@ export class Sidebar extends Component {
             const innerMap = value;
             for (const [key, value] of innerMap) {
                 for (const elem of value) {
-                    if (
-                        elem.toLowerCase().includes(searchString.toLowerCase()) &&
-                        !this.filteredStories.includes(elem)
-                    ) {
+                    if (elem.toLowerCase().includes(searchString.toLowerCase()) && !this.filteredStories.includes(elem)) {
                         this.filteredStories.push(elem);
                         if (!this.filteredFolders.includes(key)) {
                             this.filteredFolders.push(key);
@@ -116,20 +111,14 @@ export class Sidebar extends Component {
                         }
                     }
                 }
-                if (
-                    key.toLowerCase().includes(searchString.toLowerCase()) &&
-                    !this.filteredFolders.includes(key)
-                ) {
+                if (key.toLowerCase().includes(searchString.toLowerCase()) && !this.filteredFolders.includes(key)) {
                     this.filteredFolders.push(key);
                     if (!this.filteredModule.includes(module)) {
                         this.filteredModule.push(module);
                     }
                 }
             }
-            if (
-                module.toLowerCase().includes(searchString.toLowerCase()) &&
-                !this.filteredModule.includes(module)
-            ) {
+            if (module.toLowerCase().includes(searchString.toLowerCase()) && !this.filteredModule.includes(module)) {
                 this.filteredModule.push(module);
             }
         }
@@ -140,3 +129,5 @@ export class Sidebar extends Component {
         window.history.pushState(null, "", "owlybook");
     }
 }
+
+Sidebar.template = "owlybook.Sidebar";

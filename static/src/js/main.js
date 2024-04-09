@@ -9,6 +9,8 @@ import {
     makeFakeLocalizationService,
     makeFakeHTTPService,
 } from "@web/../tests/helpers/mock_services";
+import { session } from "@web/session";
+import { patch } from "@web/core/utils/patch";
 
 // The following code ensures that owl mount the component when ready.
 // `templates` contains templates contained in the bundles.
@@ -37,6 +39,18 @@ owl.whenReady(async () => {
 
     await startServices(env);
 
+    // @ts-ignore
+    owl.Component.env.session = {};
+    patch(session, "sessionPatch", {
+        currencies: {
+            1: {
+                name: "USD",
+                symbol: "$",
+                position: "before",
+                digits: [0, 4],
+            },
+        },
+    });
     // @ts-ignore
     mount(OwlybookView, document.body, { templates, env });
 });

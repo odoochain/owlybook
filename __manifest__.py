@@ -38,9 +38,13 @@
             'owlybook/static/src/js/**/*.js',
             'owlybook/static/src/js/**/*.xml',
             'owlybook/static/src/stories/**/*',
-            'web/static/tests/patch_translations.js',
+
+            # next line is required for tour
+            'web/static/tests/legacy/legacy_setup.js',
 
             'web/static/tests/helpers/**/*.js',
+            ('remove', "web/static/tests/helpers/legacy.js"),
+            ('remove', "web/static/tests/helpers/legacy_env_utils.js"),
             ('remove', "web/static/tests/helpers/mock_env.js"),
         ],
         'web.tests_assets': [
@@ -52,4 +56,5 @@
         ],
     },
     'application': True,
+    "license": "AGPL-3",
 }
